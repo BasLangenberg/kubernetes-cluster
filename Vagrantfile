@@ -1,5 +1,9 @@
 # -*- mode: ruby -*-
 # vi: set ft=ruby :
+#
+
+# Find available versions with apt-cache madison kubelet
+kubernetes_version = "1.15.4-00"
 
 servers = [
     {
@@ -52,7 +56,7 @@ $configureBox = <<-SCRIPT
     deb http://apt.kubernetes.io/ kubernetes-xenial main
 EOF
     apt-get update
-    apt-get install -y kubelet kubeadm kubectl
+    apt-get install -y kubelet=#{kubernetes_version} kubeadm=#{kubernetes_version} kubectl=#{kubernetes_version}
     apt-mark hold kubelet kubeadm kubectl
 
     # kubelet requires swap off
